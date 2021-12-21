@@ -1,4 +1,0 @@
-Company Name: DREAMAJAXTECHNOLOGIES
-Job Title: PYTHONDEVELOPER
-Skills: python,django,api,sql,nosql
-Link to job listing: https://www.timesjobs.com/job-detail/python-developer-dreamajax-technologies-bengaluru-bangalore-4-to-7-yrs-jobid-EWIVCDzRLKBzpSvf__PLUS__uAgZw==&source=srp

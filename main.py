@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
 import time
-import os
 
 done = False
 unfamiliar_skills = []
@@ -42,10 +41,10 @@ def find_jobs():
       # experience level
       experience = details[0].text
 
-      should_save = True
+      should_save = False
       for skill in unfamiliar_skills:
         if skill not in skills:
-          should_save = False
+          should_save = True
       if should_save:
         try: 
           with open(f'data/{job_id}.txt', 'x') as f:

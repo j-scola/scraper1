@@ -1,4 +1,0 @@
-Company Name: PureTechCodexPrivateLimited
-Job Title: Python
-Skills: rest,python,database,django,debugging,mongodb
-Link to job listing: https://www.timesjobs.com/job-detail/python-pure-tech-codex-private-limited-pune-2-to-3-yrs-jobid-OHwfF0d6EhNzpSvf__PLUS__uAgZw==&source=srp
