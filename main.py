@@ -1,6 +1,23 @@
 from bs4 import BeautifulSoup
 import requests
 
+done = False
+unfamiliar_skills = []
+
+print('If there are any skills you would like remove from results, type them below. Leave blank to skip.')
+while not done:
+  unfamiliar_skill = input('>')
+  if unfamiliar_skill == '':
+    done = True
+  else:
+    unfamiliar_skills.append(unfamiliar_skill)
+    
+print(f'Getting jobs. Filtering out results that contain:')
+for skill in unfamiliar_skills:
+  print(skill)  
+
+
+
 # request the html file based on search parameters
 html_text = requests.get('https://www.timesjobs.com/candidate/job-search.html?searchType=personalizedSearch&from=submit&txtKeywords=python&txtLocation=').text
 
@@ -9,6 +26,7 @@ soup = BeautifulSoup(html_text, 'lxml')
 
 # create list of job cards
 joblist = soup.find('ul', class_='new-joblist')
+
 
 # create a list to store objects
 jobs_data = []
@@ -19,9 +37,10 @@ try:
     posted_on = job_card.find('span', class_='sim-posted').span.text
     if posted_on.find('few days ago') >= 0:
     
+      url = job_card.header.h2.a['href']
       details = job_card.find('ul', class_='top-jd-dtl').findAll('li')
-      
       job_title_tuple = job_card.find('h2').text,
+
       for title in job_title_tuple:
         job_title = title.replace('\n', '').replace(' ','')
 
@@ -31,26 +50,19 @@ try:
     
       location = details[-1].text.split('\n')[2]
       experience = details[0].text
+            
+      should_print = True
       
-      # Job_data = {
-      #   'company_name': company_name,
-      #   'job_title': job_title,
-      #   'location': location,
-      #   'experience': experience,
-      # }
+      for skill in unfamiliar_skills:
+        if skill in skills:
+          should_print = False
       
-      jobs_data.append(f'''
-
-Company Name: {company_name}
-Job Title:
-{job_title}
-
-
-Skills:
-{skills}
-
-__________________________________
-''')
+      if should_print:
+        print(f'''Company Name: {company_name.strip()}''')
+        print(f'''Job Title: {job_title.strip()}''')
+        print(f'''Skills: {skills.strip()}''')
+        print(f'''Link to job listing: {url}''')
+        print('')
 except:
   print('an error occurred durring html file parsing')
     
